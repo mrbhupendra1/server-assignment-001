@@ -3,5 +3,5 @@ function add(a, b) {
 }
 
 console.log("Sum is:", add(5, 3));
-console.log("CI pipeline retest successful ✅");
+console.log("Server assignment test passed ✅");
 

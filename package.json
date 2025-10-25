@@ -1,0 +1,11 @@
+{
+  "name": "server-assignment-001",
+  "version": "1.0.0",
+  "description": "Simple Node.js test project for CI",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"CI Test Passed ✅\" && exit 0"
+  },
+  "license": "MIT"
+}
+

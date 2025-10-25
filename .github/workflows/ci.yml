@@ -7,23 +7,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server-assignment-001
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Change working directory
-        run: cd server-assignment-001
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
+      - name: Verify working directory
+        run: pwd && ls -la
+
       - name: Install dependencies
-        working-directory: ./server-assignment-001
         run: npm install
 
       - name: Run Tests
-        working-directory: ./server-assignment-001
         run: npm test
 

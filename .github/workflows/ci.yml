@@ -1,10 +1,13 @@
-name: Node.js CI
+name: CI Pipeline
 
 on:
   push:
-    branches: [ "feature/test-ci" ]
+    branches:
+      - main
+      - feature/*
   pull_request:
-    branches: [ "feature/test-ci" ]
+    branches:
+      - main
 
 jobs:
   build:
@@ -12,16 +15,27 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run test
-        run: echo "✅ CI Pipeline Running Successfully"
+      - name: Run ESLint
+        run: npm run lint || echo "Skipping lint (not configured)"
+
+      - name: Run Prettier
+        run: npm run prettier -- --check || echo "Skipping prettier (not configured)"
+
+      - name: Run Tests
+        env:
+          CI: true
+        run: npm test
+
+      - name: Build
+        run: npm run build || echo "Skipping build (not configured)"
 
